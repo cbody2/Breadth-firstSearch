@@ -16,8 +16,9 @@ public class MainBFS {
     }
 
     private static HashMap<String, List<String>> readTextFile(String filename) {
+        /* here's a suggestion */
         HashMap<String, List<String>> cityMap = new HashMap<>();
-        BufferedReader br = new BufferedReader()
+        BufferedReader br = new BufferedReader();
 
         return cityMap;
     }
