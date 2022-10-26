@@ -15,10 +15,24 @@ public class MainBFS {
         HashMap<String,List<String>> citiesMap = readTextFile(filename);
     }
 
-    private static HashMap<String, List<String>> readTextFile(String filename) {
+    private static HashMap<String, List<String>> readTextFile(String filename)  {
         /* here's a suggestion */
         HashMap<String, List<String>> cityMap = new HashMap<>();
-        BufferedReader br = new BufferedReader();
+        try (Scanner filScan = new Scanner(new File(filename))) {
+            while (filScan.hasNext()) {
+                String line = filScan.nextLine();
+                String[] parts = line.split(",");
+                String key = parts[0];
+                List<String> connects = new ArrayList<>();
+                for (int i = 1; i < parts.length; i++) {
+                    connects.add(parts[i]);
+                }
+                cityMap.put(key,connects);
+            }
+        } catch (Exception e) {
+            System.out.println("Cannot read file");
+            System.exit(0);
+        }
 
         return cityMap;
     }
