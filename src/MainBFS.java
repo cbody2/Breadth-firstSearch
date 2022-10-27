@@ -10,9 +10,39 @@ public class MainBFS {
     }
 
     public static void main(String[] args) {
-        String filename = args[0];
+        String filename = "MyLocations.txt";
 
         HashMap<String,List<String>> citiesMap = readTextFile(filename);
+        //System.out.println(citiesMap);
+        //startCity, destinationCity, citiesMap -- arguments to bfs function, return = list of strings (startCity, destination, connections between)
+        String startCity = citiesMap.keySet().toArray()[0].toString();
+        String destinationCity = citiesMap.keySet().toArray()[1].toString();
+        ArrayList<String> visited = new ArrayList<>();
+        bfs(startCity, destinationCity, citiesMap, visited);
+    }
+
+    private static void bfs(String startCity, String destinationCity, HashMap<String, List<String>> graph, ArrayList<String> visited) {
+        visited.add(startCity);
+        ArrayList<String> path = new ArrayList<>();
+        path.add(startCity);
+        ArrayDeque<ArrayList<String>> q_paths = new ArrayDeque<>();
+        q_paths.add(path);
+        while(!q_paths.isEmpty()) {
+            ArrayList<String> partialPath = q_paths.removeFirst();
+            String lastCity = partialPath.get(partialPath.size()-1);
+            for (int i = 0; i < graph.get(lastCity).size(); i++) {
+                ArrayList<String> extended_path = new ArrayList<>(partialPath);
+                String nextCity = graph.get(lastCity).get(i);
+                if(!partialPath.contains(nextCity)) {
+                    extended_path.add(nextCity);
+                    if(nextCity.equals(destinationCity)) {
+                        System.out.println(extended_path);
+                    } else {
+                        q_paths.add(extended_path);
+                    }
+                }
+            }
+        }
     }
 
     private static HashMap<String, List<String>> readTextFile(String filename)  {
@@ -32,7 +62,7 @@ public class MainBFS {
             System.out.println("Cannot read file");
             System.exit(0);
         }
-
+        
         return cityMap;
     }
 
