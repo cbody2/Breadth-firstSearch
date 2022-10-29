@@ -13,7 +13,7 @@ public class MainBFS {
         String filename = "MyLocations.txt";
 
         HashMap<String,List<String>> citiesMap = readTextFile(filename);
-        //System.out.println(citiesMap);
+        System.out.println(citiesMap);
         //startCity, destinationCity, citiesMap -- arguments to bfs function, return = list of strings (startCity, destination, connections between)
         String startCity = citiesMap.keySet().toArray()[0].toString();
         String destinationCity = citiesMap.keySet().toArray()[1].toString();
@@ -30,6 +30,14 @@ public class MainBFS {
         while(!q_paths.isEmpty()) {
             ArrayList<String> partialPath = q_paths.removeFirst();
             String lastCity = partialPath.get(partialPath.size()-1);
+            /*
+            Some of the links are 'one-way' connections, for example, in MyLocations.txt
+            Memphis connects to Clarksville, but there's no entry at all for Clarksville --
+            that's why it's crashing.
+            Try this: retrieve the list of connections, only execute the for-loop
+            if the list is not null
+            (rl)
+             */
             for (int i = 0; i < graph.get(lastCity).size(); i++) {
                 ArrayList<String> extended_path = new ArrayList<>(partialPath);
                 String nextCity = graph.get(lastCity).get(i);
