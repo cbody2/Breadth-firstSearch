@@ -1,6 +1,6 @@
 Memphis,Arkansas,Clarksville,Nashville
 Nashville,Knoxville,Memphis,Chattanooga
-Chattanooga,Cleveland,East Ridge,Dalton
-Dalton,Atlanta,Savannah,Macon
+Chattanooga,Nashville,Cleveland,East Ridge,Dalton
+Dalton,Chattanooga,Atlanta,Savannah,Macon
 Atlanta,Macon,Savannah,Norcross
 Norcross,Tucker,North Atlanta,Sandy Springs
